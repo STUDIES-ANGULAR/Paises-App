@@ -17,11 +17,11 @@ export class PorPaisComponent {
 
   constructor( private paisService: PaisService) { }
 
-  buscar() {
+  buscar( termino: string) {
     this.hayError= false;
-    console.log(this.termino);
-    
-    this.paisService.buscarPais(this.termino)
+    this.termino = termino;
+
+    this.paisService.buscarPais(termino)
       .subscribe((paises) => { //el subscribe es para que el observable se dispare, ya que no es una promesa 
         console.log(paises);
         this.paises= paises;

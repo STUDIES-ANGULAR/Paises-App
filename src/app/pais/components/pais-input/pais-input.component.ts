@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-pais-input',
@@ -6,13 +9,32 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class PaisInputComponent  {
+export class PaisInputComponent implements OnInit  {
+  
+
+  @Output() onEnter   : EventEmitter<string> = new EventEmitter();
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+
+  debouncer: Subject<string> = new Subject();
 
   termino: string = '';
 
-  buscar(){
-
+  ngOnInit(): void {
+    this.debouncer
+      .pipe(
+        debounceTime(300) //le decimos que no emita el subscribe si no han pasado 300 miliseg.
+      )
+      .subscribe(valor => {
+        console.log('debouncer:', valor);
+      })
   }
-  
+
+  buscar() {
+    this.onEnter.emit(this.termino);
+  }
+
+  teclaPresionada() {
+    this.debouncer.next(this.termino);
+  }
 
 }
