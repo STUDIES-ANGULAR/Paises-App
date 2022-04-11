@@ -16,11 +16,20 @@ private apiURL: string = 'https://restcountries.com/v3.1/';
   buscarPais(termino: string): Observable<Pais[]> {
     
     const url = `${this.apiURL}/name/${termino}`;
-    return this.http.get<Pais[]>(url)
+    return this.http.get<Pais[]>(url);
      //   .pipe(
           // catchError( err=>of(['Error controlado desde el of']))   //el of es una funcion que genera observable el cual transforma lo que pongamos 
                                                                   //en parentesis en un nuevo observable (lo que devuelve la peticion en caso de error)
      //   )
   }
+
+  buscarPorCapital( termino: string): Observable<Pais[]>{
+    const url = `${this.apiURL}/capital/${termino}`;
+    return this.http.get<Pais[]>(url);
+  }
+
+  getPaisPorCodigo(idPais: string): Observable<Pais>{
+    const url = `${this.apiURL}/alpha?codes=${idPais}`;
+    return this.http.get<Pais>(url);
+  }
 }
-   

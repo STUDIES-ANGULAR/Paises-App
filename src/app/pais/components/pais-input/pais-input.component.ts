@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -10,10 +10,12 @@ import { debounceTime } from 'rxjs/operators';
   ]
 })
 export class PaisInputComponent implements OnInit  {
-  
+  // placeholder: string = '';
 
   @Output() onEnter   : EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+
+  @Input() placeholder: string = '';
 
   debouncer: Subject<string> = new Subject();
 
@@ -21,11 +23,9 @@ export class PaisInputComponent implements OnInit  {
 
   ngOnInit(): void {
     this.debouncer
-      .pipe(
-        debounceTime(300) //le decimos que no emita el subscribe si no han pasado 300 miliseg.
-      )
+      .pipe(debounceTime(500)) //le decimos que no emita el subscribe si no han pasado 500 miliseg.
       .subscribe(valor => {
-        console.log('debouncer:', valor);
+        this.onDebounce.emit(valor);
       })
   }
 
@@ -33,8 +33,9 @@ export class PaisInputComponent implements OnInit  {
     this.onEnter.emit(this.termino);
   }
 
-  teclaPresionada() {
+  teclaPresionada(event: any) {
     this.debouncer.next(this.termino);
+ //   console.log(event.target.value); // tendra el mismo valor que el termino
   }
 
 }
