@@ -29,7 +29,7 @@ private apiURL: string = 'https://restcountries.com/v3.1/';
   }
 
   getPaisPorCodigo(idPais: string): Observable<Pais>{
-    const url = `${this.apiURL}/alpha?codes=${idPais}`;
+    const url = `${this.apiURL}/alpha/${idPais}`;
     return this.http.get<Pais>(url);
   }
 }
