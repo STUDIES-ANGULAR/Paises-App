@@ -12,14 +12,28 @@
         <tbody>
             <tr *ngFor="let pais of paises; let indice= index">
                 <td>{{indice + 1}}</td>
-                <td>
+               
+                <!-- si no viene el .svg mostrar solo flag -->
+                <td *ngIf="pais.flags; else onlyFlag">
                     <img class="small-flag" alt="img-bandera" [src]="pais.flags.svg">
                 </td> 
-                <td>{{pais.name.common }}</td>
+                <ng-template #onlyFlag>
+                    <td>
+                        <img class ="small-flag" alt="img-bandera" [src]="pais.flag">
+                    </td>
+                </ng-template>
+                
+                <td>{{pais.name.common ? pais.name.common : pais.name  }}</td>
                 <td>{{pais.population | number}}</td>
-                <td>
+                <!-- si no viene el cca2 mostrarlo por alpha2Code -->
+                <td *ngIf="pais.cca2; else alpha2Code"> 
                     <a [routerLink]="['/pais', pais.cca2]">ver más</a>
                 </td>
+                <ng-template #alpha2Code>                    
+                    <td>
+                        <a [routerLink]="['/pais', pais.alpha2Code]">ver más</a>
+                    </td>
+                </ng-template>
             </tr>
         </tbody>
     </table>

@@ -33,6 +33,8 @@ export interface Pais {
     coatOfArms:   CoatOfArms;
     startOfWeek:  string;
     capitalInfo:  CapitalInfo;
+    alpha2Code?: string;
+    
 }
 
 export interface CapitalInfo {
