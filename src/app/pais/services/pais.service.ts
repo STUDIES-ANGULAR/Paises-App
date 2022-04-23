@@ -12,6 +12,9 @@ export class PaisService {
 private apiURL: string = 'https://restcountries.com/v3.1/';
 private apiURLv2: string = 'https://restcountries.com/v2/regionalbloc/';
 
+get httpParams (){
+  return  new HttpParams().set('fields', 'name,capital,alpha2Code,flags,population,cca2');
+}
 
 
   constructor( private http: HttpClient) { }
@@ -19,7 +22,7 @@ private apiURLv2: string = 'https://restcountries.com/v2/regionalbloc/';
   buscarPais(termino: string): Observable<Pais[]> {
     
     const url = `${this.apiURL}name/${termino}`;
-    return this.http.get<Pais[]>(url);
+    return this.http.get<Pais[]>(url, { params: this.httpParams}); //Opcion #2 params por un get de la clase
      //   .pipe(
           // catchError( err=>of(['Error controlado desde el of']))   //el of es una funcion que genera observable el cual transforma lo que pongamos 
                                                                   //en parentesis en un nuevo observable (lo que devuelve la peticion en caso de error)
@@ -42,7 +45,9 @@ private apiURLv2: string = 'https://restcountries.com/v2/regionalbloc/';
           .set('fields', 'name,capital,alpha2Code,flag,population');
 
     const url = `${this.apiURLv2}${region}`;
+    //Opción #1 manejo de params
     return this.http.get<Pais[]>(url, {params: httpParams}); //o puedo dejarlo solo {params}  cambiando el httpParams por params
+    
   }
 
 }
