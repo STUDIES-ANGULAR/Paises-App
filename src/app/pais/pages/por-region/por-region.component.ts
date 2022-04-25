@@ -34,6 +34,7 @@ export class PorRegionComponent  {
     this.paisService.buscarPorRegion(region)
     .subscribe((listPaises)=>{
       this.paises = listPaises;
+
     },(err)=>{
       this.paises = [];
     })

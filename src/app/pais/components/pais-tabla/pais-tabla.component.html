@@ -1,5 +1,5 @@
 <table 
-        class="table table-hover">
+        class="table table-hover animate__animated  animate__bounceInRight ">
         <thead>
             <tr>
                 <th>#</th>
@@ -23,7 +23,7 @@
                     </td>
                 </ng-template>
                 
-                <td>{{pais.name.common ? pais.name.common : pais.name  }}</td>
+                <td>{{pais.capital}} - {{pais.name.common ? pais.name.common : pais.name  }}</td>
                 <td>{{pais.population | number}}</td>
                 <!-- si no viene el cca2 mostrarlo por alpha2Code -->
                 <td *ngIf="pais.cca2; else alpha2Code"> 

@@ -23,7 +23,6 @@ export class PorPaisComponent {
 
     this.paisService.buscarPais(termino)
       .subscribe((paises) => { //el subscribe es para que el observable se dispare, ya que no es una promesa 
-        console.log(paises);
         this.paises= paises;
        
       }, (err) => {

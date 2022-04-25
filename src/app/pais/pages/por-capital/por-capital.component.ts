@@ -24,7 +24,6 @@ export class PorCapitalComponent{
     this.paisService.buscarPorCapital(termino)
       .subscribe((paises) => { //el subscribe es para que el observable se dispare, ya que no es una promesa 
         this.paises= paises;
-       
       }, (err) => {
         // console.info(err);
         this.hayError = true;

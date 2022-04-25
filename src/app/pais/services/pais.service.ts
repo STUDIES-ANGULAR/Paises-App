@@ -31,7 +31,7 @@ get httpParams (){
 
   buscarPorCapital(termino: string): Observable<Pais[]> {
     const url = `${this.apiURL}capital/${termino}`;
-    return this.http.get<Pais[]>(url);
+    return this.http.get<Pais[]>(url, {params: this.httpParams});
   }
 
   getPaisPorCodigo(idPais: string): Observable<Pais> {
