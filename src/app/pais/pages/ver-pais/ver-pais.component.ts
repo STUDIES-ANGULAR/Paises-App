@@ -35,7 +35,7 @@ export class VerPaisComponent implements OnInit {
         //  OPCION #2
         this.activatedRoute.params
           .pipe(
-            switchMap(({idPais}) => this.paisService.getPaisPorCodigo(idPais) ), // el  switchMap es un operador de transformacion recibe un observable y devuelve otro observable
+            switchMap(({idPais}) => this.paisService.getPaisPorCodigo(idPais) ), // el  switchMap es un operador de transformacion, recibe un observable y devuelve otro observable
             tap(console.log) //el tap imprime lo que responde el  observable , es como imprimir la respuesta directamente ejem: tap (resp=> console.log(resp))
 
           )

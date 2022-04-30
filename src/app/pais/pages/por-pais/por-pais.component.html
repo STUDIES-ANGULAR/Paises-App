@@ -12,6 +12,29 @@
     </div>
 </div>
 
+<ul *ngIf="mostrarSugerencias"
+    class="list-group" >
+    <li *ngFor = "let paisSugerido of paisesSugeridos"
+        class = "list-group-item list-group-item-action"  >
+        <a class="nav-link"
+           [routerLink]="['/pais', paisSugerido.cca2]">
+            {{paisSugerido.name.common}}
+        </a>
+    </li>
+    <li class = "list-group-item list-group-item-action" 
+    (click)="buscar(termino)" >
+    <a class="nav-link">
+        Buscar "{{termino}}"
+    </a>
+</li>
+</ul>
+<!-- <td *ngIf="pais.cca2; else alpha2Code"> 
+    <a [routerLink]="['/pais', pais.cca2]">ver más</a>
+</td>
+<ng-template #alpha2Code>                    
+    <td>
+        <a [routerLink]="['/pais', pais.alpha2Code]">ver más</a> -->
+
 <hr>
 <div    *ngIf="hayError" 
     class="alert alert-danger"> 
